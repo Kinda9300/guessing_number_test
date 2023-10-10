@@ -26,11 +26,13 @@ const Coin = () => {
 
     const sendChance = async () => {
         setShowchance(totalchance);
-        const contract = await erc20Contract;
-        console.log(contract);
-        if (contract) {
-            await contract.approve(address, totalchance);
-
+        
+        try {
+            if (erc20Contract) {
+                await erc20Contract.approve(address, totalchance);
+            }
+        } catch (err) {
+            console.log(err)
         }
     }
 
