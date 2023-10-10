@@ -187,13 +187,17 @@
     .explode {
         display: none;
     }
+
+    .firefork {
+        left: calc(50% - 150px) !important;
+    }
 }
 
 .firefork {
     width: 300px;
     height: 300px;
     position: absolute;
-    left: 60%;
+    left: calc((100% - 330px) / 2 + 150px);
     transform: translateY(-60%);
     top: 300px;
     opacity: 0;

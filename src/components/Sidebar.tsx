@@ -1,7 +1,10 @@
 import { Box, Tab, Tabs, Typography, Stack, Grid } from "@mui/material";
 import { useState } from "react";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import connectImg from "../images/connect.png";
 import disconnectImg from "../images/disconnect.png";
+import formatAddress from "../utils/formatAddress";
+import CopyIcon from "../icons/CopyIcon";
 
 import Help from "./Help";
 
@@ -84,9 +87,13 @@ const Sidebar = ({ isConnected, address, chain }: Props) => {
                 <Typography>Address</Typography>
                 <Typography sx={{ color: "#4aa41b" }}>
                   {isConnected && address
-                    ? address.slice(0, 20)
+                    ? formatAddress(address)
                     : "Not Connected"}
                 </Typography>
+
+                <CopyToClipboard text={address || ''} onCopy={() => alert('Address is copied!')}>
+                  <CopyIcon sx={{ cursor: 'pointer' }} />
+                </CopyToClipboard>
               </Stack>
             </Box>
             <Box>

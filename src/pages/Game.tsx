@@ -39,17 +39,15 @@ export function Game() {
     }
     (async () => {
       try {
-        const contract = await erc20Contract;
-        if (contract && address) {
-          const approvalAmount = await contract?.allowance(
+        if (erc20Contract && address) {
+          const approvalAmount = await erc20Contract?.allowance(
             address,
             config.guessAddress
           );
           setTotalchance(Number(approvalAmount.toString()) / Math.pow(10, 18));
           setShowing(Number(approvalAmount.toString()) / Math.pow(10, 18));
         }
-        const gContract = await guessContract;
-        if (gContract && address) {
+        if (guessContract && address) {
         }
       } catch (error) {
         console.log(error);
@@ -60,13 +58,12 @@ export function Game() {
   // approve method connected to aprove contract
   const approve = async (approvenum: Number) => {
     setShowing(totalchance);
-    const contract = await erc20Contract;
-    if (contract) {
-      await contract.approve(
+    if (erc20Contract) {
+      await erc20Contract.approve(
         config.guessAddress,
         approvenum + "000000000000000000"
       );
-      contract.on("Approval", (_userAddress, _delegate, _numTokens) => {
+      erc20Contract.on("Approval", (_userAddress, _delegate, _numTokens) => {
         console.log(_numTokens / Math.pow(10, 18));
         setTotalchance(_numTokens / Math.pow(10, 18));
       });
@@ -94,10 +91,9 @@ export function Game() {
     }
 
     setShowingnum(guessingnum);
-    const contract = await guessContract;
-    if (contract) {
-      await contract.attempt(guessnum.toString(), { gasLimit: 400000 });
-      contract.on(
+    if (guessContract) {
+      await guessContract.attempt(guessnum.toString(), { gasLimit: 400000 });
+      guessContract.on(
         "GuessResult",
         (_userAddress, _approvalAmount, _total, _guess, _message) => {
           var element = document.getElementById("rocket");
