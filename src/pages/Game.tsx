@@ -84,13 +84,6 @@ export function Game() {
 
   // gussing method connected to guess contract
   const guess = async (guessnum: Number) => {
-    if (guessingnum > 255 || guessingnum < 0) {
-      alert("From 0 to 255");
-      setGuessingnum(0);
-      return;
-    }
-
-    setShowingnum(guessingnum);
     if (guessContract) {
       await guessContract.attempt(guessnum.toString(), { gasLimit: 400000 });
       guessContract.on(
@@ -131,6 +124,7 @@ export function Game() {
 
   // get current gussing number from approve componenet;
   const getGuess = (guessnum: Number) => {
+    setShowingnum(Number(guessnum)); //
     guess(guessnum); // call guess contract part
   };
 
@@ -188,9 +182,10 @@ export function Game() {
                     sx={{
                       width: "100px",
                       margin: "0px 5px",
+                      fontSize: "40px",
                       display: !showingnum ? "none" : "inline-block",
                     }}
-                    variant={"contained"}
+                    size={"large"}
                   >
                     {showingnum}
                   </Button>

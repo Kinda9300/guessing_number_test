@@ -177,15 +177,24 @@
 
 @media screen and (max-width: 900px) {
     .rocket {
-        display: none;
+        /* display: none; */
+        width: 70px;
+        height: 140px;
+        top: 130px;
+        left: 40%;
     }
 
     .rocket-fire {
-        display: none
+        /* display: none */
+        margin-top: 210px;
+        left: 38%;
     }
 
     .explode {
-        display: none;
+        /* display: none; */
+        opacity: 0;
+        top: 160px;
+        left: 80px;
     }
 
     .firefork {

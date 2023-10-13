@@ -10,6 +10,7 @@ interface Props {
 const Approve = ({ leftchance, sendGuess, sendApprove }: Props) => {
   const [totalchance, setTotalchance] = useState(0);
   const [guessingnum, setGuessingnum] = useState(0);
+  const [showingnum, setShowingnum] = useState(0);
 
   const changeChance = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,6 +22,7 @@ const Approve = ({ leftchance, sendGuess, sendApprove }: Props) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setGuessingnum(parseInt(event.target.value));
+    setShowingnum(Number(event.target.value));
   };
 
   const approve = () => {
@@ -28,6 +30,12 @@ const Approve = ({ leftchance, sendGuess, sendApprove }: Props) => {
   };
 
   const guess = () => {
+    if (guessingnum > 255 || guessingnum < 0) {
+      alert("Please select From 0 to 255");
+      setGuessingnum(0);
+      setShowingnum(0);
+      return;
+    }
     sendGuess(guessingnum);
   };
 
@@ -75,6 +83,7 @@ const Approve = ({ leftchance, sendGuess, sendApprove }: Props) => {
             id="outlined-adornment-weight"
             onChange={changeGuessing}
             sx={{ paddingRight: "0px" }}
+            value={showingnum}
             endAdornment={
               <Button
                 sx={{
